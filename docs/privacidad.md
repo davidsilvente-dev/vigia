@@ -28,7 +28,6 @@ El reconocimiento facial y cualquier identificación biométrica están **fuera 
 ### Motivo obligatorio y auditoría
 - Buscar una matrícula o una persona exige indicar el **motivo**.
 - Cada acceso a datos personales queda en un registro de auditoría encadenado (cada entrada depende de la anterior) que permite detectar manipulaciones.
-- Alertas por volumen anómalo de búsquedas por usuario.
 
 ### Control de acceso
 | Rol | Puede |
@@ -39,7 +38,6 @@ El reconocimiento facial y cualquier identificación biométrica están **fuera 
 | Administrador técnico | Instalar y mantener el sistema **sin acceso a imágenes** |
 | Auditor / DPD | Revisar accesos, retención y solicitudes de derechos (solo lectura) |
 
-Además, permisos por cámara y por zona.
 
 ### Autenticación y sesiones
 - TLS en todas las conexiones del navegador.
@@ -48,7 +46,7 @@ Además, permisos por cámara y por zona.
 - El vídeo se sirve mediante un proxy autenticado con enlaces firmados de corta duración.
 
 ### Cadena de custodia
-Las evidencias (clips, fotos, informes) se registran con huella SHA-256 y firma. Cualquier alteración posterior es detectable.
+Las evidencias (clips, fotos, informes) se registran con huella SHA-256. Cualquier alteración posterior es detectable.
 
 ### Gestión de secretos
 - Ninguna credencial en el código, en ficheros de configuración, en la documentación ni en los registros.

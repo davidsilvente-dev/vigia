@@ -20,8 +20,11 @@ Este repositorio explica **cómo funciona VIGÍA** para que cualquiera (un técn
 |---|---|
 | [docs/funciones.md](docs/funciones.md) | Qué hace, módulo a módulo |
 | [docs/arquitectura.md](docs/arquitectura.md) | Procesos, flujo de datos, GPU, contratos entre servicios |
+| [docs/dgt.md](docs/dgt.md) | Integración con la DGT: estados, flujo, requisitos y activación |
+| [docs/administraciones.md](docs/administraciones.md) | Matriz de cumplimiento, roles, exportabilidad y contratación |
 | [docs/privacidad.md](docs/privacidad.md) | RGPD, LOPDGDD, LO 7/2021, ENS y Reglamento Europeo de IA |
 | [docs/calidad.md](docs/calidad.md) | Cómo se mide la calidad y resultados en producción |
+| [docs/hoja-de-ruta.md](docs/hoja-de-ruta.md) | Disponible hoy, preparado y siguiente |
 | [docs/lecciones.md](docs/lecciones.md) | Lo que enseñó la primera versión y cómo cambió el diseño |
 | [docs/faq.md](docs/faq.md) | Preguntas frecuentes |
 
@@ -33,8 +36,12 @@ Este repositorio explica **cómo funciona VIGÍA** para que cualquiera (un técn
 |---|---|
 | **Directo y muro** | Todas las cámaras en el navegador y el móvil, organizadas por grabador; clips de grabación en 1,5 s |
 | **Matrículas (LPR)** | Tres motores de lectura votan cada matrícula; se acepta solo cuando coinciden motores independientes |
-| **Tracking y dossier** | Avistamientos de una matrícula con foto, hora y cámara; recorrido por calles reales; consulta con motivo auditado |
+| **Tracking y dossier** | Avistamientos de una matrícula con foto, hora y cámara; recorrido por calles reales con velocidad por tramo; consulta con motivo auditado |
+| **Listas de vigilancia** | Aviso inmediato cuando cualquier cámara lee una matrícula de interés; decide siempre una persona |
+| **DGT** *(preparado)* | Consulta auditada y avisos automáticos por matrícula; se activa con el convenio. Ver [docs/dgt.md](docs/dgt.md) |
 | **«¿Qué quieres ver?»** | Búsqueda en lenguaje natural sobre todo lo indexado, en español |
+| **Analizar una franja** | Recorre una grabación entera fotograma a fotograma buscando un objeto, un color o una matrícula |
+| **Alertas por descripción** | «Coche con barca», «tractor en el casco urbano»: aviso cuando aparece en cualquier cámara |
 | **Fichas por objeto** | Tipo, prendas y color **medido** de cada persona y vehículo, con control de realidad |
 | **Vertidos (enseres)** | Objeto abandonado junto a contenedores → clip antes/después → vehículo correlado → informe A4 con cadena de custodia |
 | **Incidencias** | Cámara caída confirmada a los 20 min y escalada por correo según la causa, con decisiones firmadas |
@@ -100,6 +107,7 @@ Detalle en [docs/arquitectura.md](docs/arquitectura.md).
 | Métrica | Resultado |
 |---|---|
 | Acierto OCR de matrículas en grabación (verdad a mano) | **97,8 %**, 0 falsos por textos sobreimpresos |
+| Acierto de matrículas en directo (comprobado a mano) | **93/100** |
 | Matrículas leídas en directo | **224–280 / h** |
 | Precisión de la búsqueda visual (consultas nunca vistas) | **96 %** |
 | «Personas» que son personas reales | **95,7 %** |

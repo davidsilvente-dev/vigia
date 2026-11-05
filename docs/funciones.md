@@ -37,10 +37,21 @@ Resultado medido: **97,8 %** de acierto en grabación sobre verdad comprobada a 
 ## 3. Tracking y dossier de matrícula
 
 - Todos los avistamientos de una matrícula: foto, hora, cámara y ubicación vigente de la cámara en ese momento.
-- Recorrido reconstruido **por calles reales** con un motor de rutas (OSRM) que corre en el propio servidor.
+- Recorrido reconstruido **por calles reales** con un motor de rutas (OSRM) que corre en el propio servidor; los trayectos de días distintos no se unen.
+- Cada tramo entre cámaras muestra distancia por la vía, tiempo real y **velocidad media**, coloreada frente a la velocidad normal de esa vía (normal, rápido, muy por encima, parada o desvío).
+- **Camino posible** entre trayectos, en punteado y etiquetado («posible · 3 h sin verlo»): nunca se presenta como observado.
+- Reproducción del recorrido al ritmo real, con reloj en pantalla. Si el reloj de una cámara no está verificado, la velocidad se da con aviso.
 - Vehículos acompañantes: matrículas que aparecen repetidamente cerca en tiempo y lugar.
 - **La consulta exige motivo** y queda en el registro de auditoría con usuario, hora y motivo.
-- Integración con la DGT preparada con tres estados explícitos (`not_configured`, `configured_no_adapter`, `active`). Sin convenio activo, el sistema lo dice; nunca simula una respuesta.
+
+### Listas de vigilancia
+
+- Matrículas de interés con motivo y caducidad. Cuando cualquier cámara lee una, aviso inmediato en pantalla y al móvil con foto, cámara y último paso en el mapa.
+- Flujo **alerta → contexto → acción en 2 toques**. Siempre decide una persona; ninguna acción automática.
+
+### DGT
+
+Integración preparada con tres estados explícitos (`not_configured`, `configured_no_adapter`, `active`). Sin convenio activo, el sistema lo dice; nunca simula una respuesta. Detalle completo en [dgt.md](dgt.md).
 
 ## 4. «¿Qué quieres ver?» — búsqueda visual
 
@@ -49,6 +60,23 @@ Resultado medido: **97,8 %** de acierto en grabación sobre verdad comprobada a 
 - El **color se mide** sobre los píxeles del objeto (prenda o carrocería), no se adivina. Si el color medido no casa con la consulta, el resultado se marca como no verificado.
 - Si una consulta no es fiable (por ejemplo «grúa», que el detector confunde con camiones con pluma), la respuesta lo dice: «0 resultados verificados».
 - Medido en noviembre de 2026 sobre consultas nunca usadas para ajustar: **96 %** de precisión; prenda + color **96,5 %**; coche por color **100 %**.
+- Vocabulario abierto en el indexado: además de personas y vehículos, objetos como tractor, ambulancia, patinete o barco.
+
+### Analizar una franja de grabación
+
+- El operador elige cámara, día, hora de inicio y de fin, y qué busca: texto libre («coche rojo», «furgoneta blanca»), una matrícula completa o en parte, o «todo».
+- VIGÍA descarga del grabador la grabación entera de esa franja por tramos y la recorre a 2–5 fotogramas por segundo con detección, vocabulario abierto, búsqueda visual, color medido y lectura de matrículas con voto multi-fotograma.
+- Un resultado **por objeto seguido**, no por fotograma: mejor fotograma, de qué hora a qué hora estuvo a la vista, etiqueta, color, matrícula y confianza, con «Reproducir aquí».
+- Trabajo en segundo plano con progreso y tiempo estimado; se puede cancelar y se reanuda tras un reinicio desde el último tramo. Los huecos sin grabación constan con su motivo.
+- No frena el indexado: un análisis a la vez y los servicios ocupados se esperan, nunca se fuerzan. Motivo obligatorio y resultados con caducidad.
+- Exportación a CSV (Excel) y JSON.
+
+### Alertas por descripción
+
+- El operador escribe lo que quiere que salte («coche con barca») y elige cámaras (por defecto, todas).
+- Cada fotograma que se indexa se compara con las alertas activas sin volver a calcular nada; al crear la alerta se repasan las últimas 72 h.
+- Aviso en toda la aplicación con foto, pitido y notificación del navegador, contador de no vistos y clip del grabador alrededor del instante.
+- Ejemplo medido: sobre 7 días indexados, la alerta «coche con barca» encontró el único caso real con 0 falsos; el umbral se afinó después con los primeros avisos en vivo (un remolque de barca vacío).
 
 ## 5. Fichas por objeto
 
@@ -64,7 +92,7 @@ Resultado medido: **97,8 %** de acierto en grabación sobre verdad comprobada a 
 3. El objeto tiene que **persistir** en comprobaciones sucesivas para descartar a alguien de paso.
 4. Se descarga del grabador el clip de antes y después, anclado al momento del depósito.
 5. Se busca el vehículo que se detuvo allí en esa ventana y su matrícula, si alguna cámara la leyó.
-6. Se genera un informe A4 con fotos, clip, vehículo correlado y **huella SHA-256 firmada** (cadena de custodia).
+6. Se genera un informe A4 con fotos, clip, vehículo correlado y **huella SHA-256** (cadena de custodia).
 7. Aviso por correo a la Policía Local con las fotos.
 
 ## 7. Incidencias de cámaras
@@ -74,6 +102,8 @@ Resultado medido: **97,8 %** de acierto en grabación sobre verdad comprobada a 
 - Reparto por causa: **sin red → mantenimiento eléctrico**; **sin señal de vídeo → informática**; tercer nivel solo a mano.
 - Correo con la última imagen y botones de decisión con **enlaces firmados de un solo uso** («voy de camino», «no es lo mío → siguiente nivel», «resuelto»).
 - Un «resuelto» se comprueba: si la cámara sigue sin imagen, la incidencia se reabre.
+- Detección de «pantalla negra»: la cámara responde a la red pero la imagen está en negro.
+- Cascada por switch: si cae un switch, sus cámaras se agrupan en una sola avería en lugar de veinte avisos.
 - Estadística de tiempos de respuesta y resolución por responsable.
 
 ## 8. Red e inventario

@@ -19,7 +19,13 @@ El objetivo de diseño es una máquina limpia operativa en menos de un día. La 
 Un supervisor comprueba cada servicio haciendo trabajo real, reinicia solo el que falla y, si se repite, lo aísla y avisa. El sistema arranca solo tras un corte de luz.
 
 **¿Puedo consultar la titularidad de un vehículo?**
-La integración con la DGT está preparada y se activa cuando el organismo tiene el convenio de acceso. Mientras tanto, el sistema lo dice claramente y no inventa datos.
+La integración con la DGT está preparada y se activa cuando el organismo tiene acceso a la Plataforma de Intermediación de Datos (directamente o a través de su Diputación) con la finalidad autorizada. Mientras tanto, el sistema lo dice claramente y no inventa datos. Detalle en [dgt.md](dgt.md).
+
+**Ya tenemos acceso a la DGT. ¿Qué ganamos?**
+Avisos automáticos cuando una cámara de carril lee un vehículo con un aviso autorizado, consulta manual auditada desde el móvil y, en la hoja de ruta, detección de placas dobladas y búsqueda por marca y modelo entrenada con vuestro propio parque móvil.
+
+**¿Funciona con varios municipios o con la Diputación?**
+Sí. Una instalación por municipio con sus datos separados y la configuración fuera del código. La Diputación puede centralizar la conexión a Red SARA y el acompañamiento.
 
 **¿Por qué no se publica el código?**
 Porque protege datos personales de alto riesgo de un servicio público y su superficie de ataque no debe ser pública. Este repositorio explica cómo funciona sin exponer nada. Para una evaluación técnica en profundidad se puede pedir una demo o una revisión bajo acuerdo de confidencialidad.
