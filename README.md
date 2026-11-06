@@ -125,6 +125,15 @@ TypeScript (Node.js 24, Fastify 5) · Python 3.12 (FastAPI) · PostgreSQL 17 + p
 
 ---
 
+## Más información en la web
+
+- [VIGÍA para ayuntamientos](https://davidsilvente.com/videovigilancia-municipal/): qué hace, privacidad y cumplimiento, cómo se contrata y preguntas frecuentes.
+- [Lectura de matrículas para ayuntamientos](https://davidsilvente.com/videovigilancia-municipal/lectura-matriculas-ayuntamientos/)
+- [IA para Policía Local: buscar en el vídeo escribiendo](https://davidsilvente.com/videovigilancia-municipal/ia-policia-local/)
+- [Detección de vertidos ilegales con cámaras e IA](https://davidsilvente.com/videovigilancia-municipal/deteccion-vertidos-ilegales-camaras/)
+- [Videovigilancia en ayuntamientos y RGPD: qué exige cada norma](https://davidsilvente.com/videovigilancia-municipal/rgpd-videovigilancia-ayuntamientos/)
+- [Cómo contratar videovigilancia con IA en un ayuntamiento](https://davidsilvente.com/videovigilancia-municipal/contratar-videovigilancia-ia-ayuntamiento/)
+
 ## Autor y contacto
 
 Diseñado y construido por **David Silvente**, responsable de IA externo. Primer despliegue en producción en un ayuntamiento español.
